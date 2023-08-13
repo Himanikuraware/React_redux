@@ -1,26 +1,36 @@
 // createstore is deprecated that's why we have to import legacy_createStore instead of createStore.
 import { legacy_createStore as createStore } from "redux";
 
-const counterReducer = (state = { counter: 0 }, action) => {
-  if (action.type === "increment") {
-    return {
-      counter: state.counter + 1,
-    };
-  }
+const initialState = {
+  counter: 0,
+  showCounter: true,
+};
 
-  if (action.type === "increase") {
-    return {
-      counter: state.counter + action.value,
-    };
+const counterReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "increment":
+      return {
+        ...state,
+        counter: state.counter + 1,
+      };
+    case "increase":
+      return {
+        ...state,
+        counter: state.counter + action.value,
+      };
+    case "decrement":
+      return {
+        ...state,
+        counter: state.counter - 1,
+      };
+    case "toggle":
+      return {
+        ...state,
+        showCounter: !state.showCounter,
+      };
+    default:
+      return state;
   }
-
-  if (action.type === "decrement") {
-    return {
-      counter: state.counter - 1,
-    };
-  }
-
-  return state;
 };
 
 const store = createStore(counterReducer);
