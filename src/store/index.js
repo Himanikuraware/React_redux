@@ -1,4 +1,5 @@
-import { createStoreHook } from "react-redux";
+// createstore is deprecated that's why we have to import legacy_createStore instead of createStore.
+import { legacy_createStore as createStore  } from "redux";
 
 const counterReducer = (state = { counter: 0 }, action) => {
   if (action.type === "increment") {
@@ -16,6 +17,6 @@ const counterReducer = (state = { counter: 0 }, action) => {
   return state;
 };
 
-const store = createStoreHook(counterReducer);
+const store = createStore(counterReducer);
 
 export default store;
