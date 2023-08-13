@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { authActions } from "../store";
+import { authActions } from "../store/auth-slice";
 import classes from "./Header.module.css";
 
 const Header = () => {
@@ -17,10 +17,10 @@ const Header = () => {
         <nav>
           <ul>
             <li>
-              <a href="/">My Products</a>
+              <button>My Products</button>
             </li>
             <li>
-              <a href="/">My Sales</a>
+              <button>My Sales</button>
             </li>
             <li>
               <button onClick={logoutHandler}>Logout</button>
