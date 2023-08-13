@@ -3,14 +3,14 @@
 
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 
-const initialState = {
+const initialCounterState = {
   counter: 0,
   showCounter: true,
 };
 
 const counterSlice = createSlice({
   name: "counter",
-  initialState,
+  initialState: initialCounterState,
   reducers: {
     increment(state) {
       // We can mutate the state directly in redux toolkit because internally it doesn't mutate the state because it uses imgur package internally.
@@ -28,6 +28,35 @@ const counterSlice = createSlice({
   },
 });
 
+const initialAuthState = {
+  isAuthenticated: false,
+};
+
+const authSlice = createSlice({
+  name: "authentication",
+  initialState: initialAuthState,
+  reducers: {
+    login(state) {
+      state.isAuthenticated = true;
+    },
+    logout(state) {
+      state.isAuthenticated = false;
+    },
+  },
+});
+
+//slice.actions can reate a unique types of actions itself we don;t have to define like redux. 'increment' or something.
+
+const store = configureStore({
+  reducer: { counter: counterSlice.reducer, auth: authSlice.reducer },
+});
+
+export const counterActions = counterSlice.actions;
+export const authActions = authSlice.actions;
+
+export default store;
+
+/* Created Store using Redux only not redux-toolkit */
 // const counterReducer = (state = initialState, action) => {
 //   switch (action.type) {
 //     case "increment":
@@ -57,10 +86,4 @@ const counterSlice = createSlice({
 
 // const store = createStore(counterReducer);'
 
-//slice.actions can reate a unique types of actions itself we don;t have to define like redux. 'increment' or something.
-
-const store = configureStore({ reducer: counterSlice.reducer });
-
-export const counterActions = counterSlice.actions;
-
-export default store;
+// export default store;

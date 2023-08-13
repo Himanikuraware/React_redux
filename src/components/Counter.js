@@ -7,8 +7,8 @@ const Counter = () => {
   // useDispatch is used for changing the store's state.
   const dispatch = useDispatch();
   // useSelector is used to access store's state.
-  const counter = useSelector((state) => state.counter);
-  const showCounter = useSelector((state) => state.showCounter);
+  const counter = useSelector((state) => state.counter.counter);
+  const showCounter = useSelector((state) => state.counter.showCounter);
 
   const incrementHandler = () => {
     dispatch(counterActions.increment());
